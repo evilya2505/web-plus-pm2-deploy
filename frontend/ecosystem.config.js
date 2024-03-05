@@ -19,7 +19,7 @@ module.exports = {
       ref: DEPLOY_REF,
       repo: DEPLOY_REPO,
       path: DEPLOY_PATH,
-      'post-deploy': 'cd frontend && pwd && npm install && npm audit fix --force; npm run build',
+      'post-deploy': 'cd frontend && pwd && npm install && npm audit fix --force; pwd && npm run build',
     },
   },
 };
