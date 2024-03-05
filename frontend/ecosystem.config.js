@@ -1,16 +1,16 @@
-require("dotenv").config();
+const dotenv = require('dotenv');
+
+dotenv.config({ path: './.env' });
 
 const {
   DEPLOY_USER,
   DEPLOY_HOST,
   DEPLOY_PATH,
-  DEPLOY_REF = "origin/master",
+  DEPLOY_REF = 'origin/master',
   DEPLOY_REPO,
 } = process.env;
 
 module.exports = {
-  apps: [],
-
   // Настройка деплоя
   deploy: {
     production: {
@@ -19,8 +19,7 @@ module.exports = {
       ref: DEPLOY_REF,
       repo: DEPLOY_REPO,
       path: DEPLOY_PATH,
-      "pre-deploy": `scp ./*.env ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}`,
-      "post-deploy": "npm i && npm run build",
+      'post-deploy': 'cd frontend && pwd && npm ci && npm audit fix --force && npm run build',
     },
   },
 };
